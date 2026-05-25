@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nobre Chama Academia - Loja Oficial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        :root {
+            --primary: #ff6b35;
+            --secondary: #f4a261;
+            --dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.8);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--primary); }
+            100% { text-shadow: 0 0 20px var(--secondary); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.5));
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s infinite alternate;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .auth-form {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            width: 280px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            background: #1e293b;
+            color: white;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .auth-form button:hover {
+            transform: scale(1.02);
+            background: var(--secondary);
+        }
+
+        .dashboard {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .welcome {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(244, 162, 97, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .card h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .content-panel {
+            margin-top: 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            display: none;
+        }
+
+        .content-panel.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .treino-esporte {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .esporte-btn {
+            background: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .esporte-btn:hover {
+            background: var(--secondary);
+        }
+
+        .video-card {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        .avaliacao {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: gold;
+            font-size: 1.2rem;
+        }
+
+        /* LOJA COM IMAGENS REAIS */
+        .loja-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .produto-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .produto-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .produto-imagem {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .produto-card:hover .produto-imagem img {
+            transform: scale(1.05);
+        }
+
+        .produto-info {
+            padding: 20px;
+        }
+
+        .produto-info h3 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .produto-descricao {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin: 15px 0;
+            line-height: 1.4;
+            white-space: pre-line;
+        }
+
+        .produto-preco {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .produto-preco small {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .btn-comprar {
+            width: 100%;
+            background: var(--primary);
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-comprar:hover {
+            background: var(--secondary);
+            transform: scale(1.02);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ff6b35;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        button {
+            background: var(--primary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo {
+                justify-content: center;
+            }
+            .welcome {
+                font-size: 1.5rem;
+            }
+            .produto-preco {
+                font-size: 1.4rem;
+            }
+            .produto-imagem {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="https://i.imgur.com/knvvDML.jpeg" alt="Logo Nobre Chama">
+                <div class="logo-text">
+                    <h1>🔥 NOBRE CHAMA</h1>
+                    <p>Academia • Atletas • Alta Performance</p>
+                </div>
+            </div>
+            <div id="authArea">
+                <div id="loginForm" class="auth-form">
+                    <h3>Criar Conta</h3>
+                    <input type="text" id="nome" placeholder="Seu nome" autocomplete="off">
+                    <input type="text" id="user" placeholder="Usuário">
+                    <input type="password" id="pass" placeholder="Senha">
+                    <button onclick="criarConta()">🔥 Criar Conta</button>
+                </div>
+                <div id="userInfo" class="auth-form hidden">
+                    <p id="saudacao"></p>
+                    <button onclick="logout()">Sair</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="dashboard" class="dashboard hidden">
+            <div class="welcome" id="welcomeMsg"></div>
+            <div class="categories">
+                <div class="card" onclick="mostrarSecao('treinos')">
+                    <h3>🏋️ TREINOS</h3>
+                    <p>Treinos específicos para cada esporte</p>
+                </div>
+                <div class="card" onclick="mostrarSecao('avaliacoes')">
+                    <h3>⭐ AVALIAÇÕES</h3>
+                    <p>O que nossos atletas dizem</p>
+                </div>
+                <div class="card" onclick="mostrarSecao('progresso')">
+                    <h3>📈 MEU PROGRESSO</h3>
+                    <p>Acompanhe sua evolução</p>
+                </div>
+                <div class="card" onclick="mostrarSecao('loja')">
+                    <h3>🛒 LOJA NOBRE</h3>
+                    <p>Equipamentos e roupas</p>
+                </div>
+                <div class="card" onclick="mostrarSecao('sobre')">
+                    <h3>📖 SOBRE</h3>
+                    <p>Nossa história e missão</p>
+                </div>
+            </div>
+
+            <div id="treinos" class="content-panel">
+                <h2>🏆 Escolha seu esporte</h2>
+                <div class="treino-esporte">
+                    <div class="esporte-btn" onclick="carregarTreino('futebol')">⚽ Futebol</div>
+                    <div class="esporte-btn" onclick="carregarTreino('basquete')">🏀 Basquete</div>
+                    <div class="esporte-btn" onclick="carregarTreino('volei')">🏐 Vôlei</div>
+                    <div class="esporte-btn" onclick="carregarTreino('natacao')">🏊 Natação</div>
+                </div>
+                <div id="treinoConteudo"></div>
+            </div>
+
+            <div id="avaliacoes" class="content-panel">
+                <h2>💬 Avaliações da Nobre Chama</h2>
+                <div id="listaAvaliacoes"></div>
+            </div>
+
+            <div id="progresso" class="content-panel">
+                <h2>📊 Minha Evolução</h2>
+                <div id="progressoConteudo">
+                    <p>🔴 <strong>Registre-se pessoalmente em nossa academia e comece seu progresso!</strong></p>
+                    <p>💪 <em>"A chama que queima dentro de você é o que te torna nobre. Venha para a Nobre Chama e transforme sua vida!"</em></p>
+                    <p>🏅 Ao se matricular, você terá acesso a: fichas de treino personalizadas, avaliações físicas mensais e medalhas de conquista.</p>
+                </div>
+            </div>
+
+            <!-- LOJA COM IMAGENS REAIS -->
+            <div id="loja" class="content-panel">
+                <h2>🛍️ LOJA OFICIAL NOBRE CHAMA</h2>
+                <p style="margin-bottom: 20px;">Equipamentos, suplementos e roupas para quem busca a máxima performance.</p>
+                <div id="produtosLoja" class="loja-grid"></div>
+            </div>
+
+            <div id="sobre" class="content-panel">
+                <h2>🔥 Sobre a Nobre Chama</h2>
+                <p><strong>Nobre Chama Academia</strong> – Onde atletas são forjados e campeões nascem.</p>
+                <p>✔️ Foco total em <strong>qualidade e performance</strong> para atletas de alto rendimento.</p>
+                <p>✔️ Metodologia inovadora que une preparação física, mental e nutricional.</p>
+                <p>✔️ Estrutura de ponta com equipamentos de última geração e profissionais especializados.</p>
+                <p>✔️ Mais que uma academia: uma <strong>família</strong> que te leva ao próximo nível.</p>
+                <p><em>"A chama que arde dentro de cada atleta é o combustível para a vitória. Nós só ajudamos a torná-la mais forte."</em> – Fundador</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let usuarioAtual = null;
+
+        const avaliacoesFalsas = [
+            { nome: "Carlos Silva", texto: "Academia sensacional! Os treinos para atletas são de outro nível.", estrelas: 5 },
+            { nome: "Mariana Oliveira", texto: "Melhor academia que já treinei. Foco em resultado!", estrelas: 5 },
+            { nome: "Rafael Mendes", texto: "Estrutura incrível e professores muito atenciosos.", estrelas: 4 },
+            { nome: "Fernanda Souza", texto: "Recomendo demais! Já indiquei para todo meu time.", estrelas: 5 },
+            { nome: "Lucas Almeida", texto: "Uma academia muito boa, recomento!!", estrelas: 5 }
+        ];
+
+        // Produtos com imagens REAIS
+        const produtos = [
+            { 
+                nome: "WHEY PROTEIN", 
+                preco: 120.00, 
+                imagem: "https://i.imgur.com/lq6iX2e.jpeg",
+                descricao: "Concentrado • Ultrafiltrado\nForça • Recuperação • Definição\n\n✅ Alta Performance\n✅ Recuperação Intensa\n✅ Com BCAA Natural\n✅ Qualidade Premium"
+            },
+            { 
+                nome: "CREATINA", 
+                preco: 75.00, 
+                imagem: "https://i.imgur.com/xohg83F.png",
+                descricao: "Creatine Monohydrate\nForça • Potência • Performance\n\n✅ Mais Força\n✅ Mais Energia\n✅ Mais Músculos\n✅ 100% Pura e Micronizada"
+            },
+            { 
+                nome: "CAMISETA", 
+                preco: 70.00, 
+                imagem: "https://i.imgur.com/btpXDTr.jpeg",
+                descricao: "Vista sua força. Mostre sua essência.\n\n✅ Tecido Dry Fit\n✅ Estampa Premium\n✅ Resistente para treinos intensos\n✅ Design Exclusivo Nobre Chama"
+            },
+            { 
+                nome: "GARRAFA", 
+                preco: 30.00, 
+                imagem: "https://i.imgur.com/Pp2F52b.jpeg",
+                descricao: "Hidrate seu corpo. Sua essência.\n\n✅ 100% Vazamento Zero\n✅ BPA Free\n✅ Mantém bebida gelada\n✅ Capacidade 700ml/1L\n✅ Material ultra resistente"
+            }
+        ];
+
+        function criarConta() {
+            const nome = document.getElementById('nome').value;
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+
+            if(!nome || !user || !pass) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            usuarioAtual = { nome, user, pass };
+            localStorage.setItem('usuario', JSON.stringify(usuarioAtual));
+            
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('userInfo').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            const saudacao = document.getElementById('saudacao');
+            const hora = new Date().getHours();
+            let periodo = "Bom dia";
+            if(hora >= 18) periodo = "Boa noite";
+            else if(hora >= 12) periodo = "Boa tarde";
+            
+            saudacao.innerHTML = `${periodo}, <strong>${nome}</strong>! 🔥<br><small>@${user}</small>`;
+            document.getElementById('welcomeMsg').innerHTML = `✨ ${periodo}, ${nome}! ✨`;
+            
+            carregarAvaliacoes();
+            carregarLoja();
+            mostrarSecao('treinos');
+        }
+
+        function logout() {
+            usuarioAtual = null;
+            localStorage.removeItem('usuario');
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('userInfo').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('nome').value = '';
+            document.getElementById('user').value = '';
+            document.getElementById('pass').value = '';
+        }
+
+        function mostrarSecao(secao) {
+            const secoes = ['treinos', 'avaliacoes', 'progresso', 'loja', 'sobre'];
+            secoes.forEach(s => {
+                document.getElementById(s).classList.remove('active');
+            });
+            document.getElementById(secao).classList.add('active');
+        }
+
+        function carregarTreino(esporte) {
+            const div = document.getElementById('treinoConteudo');
+            let videos = {
+                futebol: "🏃‍♂️ Treino de explosão para futebol: Barreiras, tiros de potência e mudança de direção.",
+                basquete: "🏀 Treino de salto vertical: Agachamentos, pliometria e finalizações.",
+                volei: "🏐 Treino de impulsão e bloqueio: Sprints laterais e fortalecimento de ombros.",
+                natacao: "🏊 Treino de resistência aquática: Pranchão, pernada e braçada intensa."
+            };
+            div.innerHTML = `
+                <div class="video-card">
+                    <h3>🎥 ${esporte.toUpperCase()}</h3>
+                    <p>📹 ${videos[esporte]}</p>
+                    <p><strong>Como fazer:</strong> 3 séries de 12 repetições. Descanse 45s.</p>
+                    <button onclick="alert('Vídeo demonstrativo em breve! 🔥')">Assistir treino</button>
+                </div>
+            `;
+        }
+
+        function carregarAvaliacoes() {
+            const div = document.getElementById('listaAvaliacoes');
+            div.innerHTML = avaliacoesFalsas.map(a => `
+                <div class="avaliacao">
+                    <strong>${a.nome}</strong>
+                    <div class="stars">${'★'.repeat(a.estrelas)}${'☆'.repeat(5-a.estrelas)}</div>
+                    <p>${a.texto}</p>
+                </div>
+            `).join('');
+        }
+
+        function carregarLoja() {
+            const div = document.getElementById('produtosLoja');
+            div.innerHTML = produtos.map(p => `
+                <div class="produto-card">
+                    <div class="produto-imagem">
+                        <img src="${p.imagem}" alt="${p.nome}">
+                    </div>
+                    <div class="produto-info">
+                        <h3>${p.nome}</h3>
+                        <div class="produto-descricao">${p.descricao.replace(/\n/g, '<br>')}</div>
+                        <div class="produto-preco">
+                            R$ ${p.preco.toFixed(2)} <small>ou até 3x sem juros</small>
+                        </div>
+                        <button class="btn-comprar" onclick="alert('✅ Produto adicionado ao carrinho!\\n🧾 Total: R$ ${p.preco.toFixed(2)}\\n🔥 Nobre Chama agradece sua compra!')">
+                            🛒 COMPRAR AGORA
+                        </button>
+                        <div class="badge">⚡ Frete Grátis para membros</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.onload = () => {
+            const saved = localStorage.getItem('usuario');
+            if(saved) {
+                usuarioAtual = JSON.parse(saved);
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('userInfo').classList.remove('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                const saudacao = document.getElementById('saudacao');
+                const hora = new Date().getHours();
+                let periodo = "Bom dia";
+                if(hora >= 18) periodo = "Boa noite";
+                else if(hora >= 12) periodo = "Boa tarde";
+                saudacao.innerHTML = `${periodo}, <strong>${usuarioAtual.nome}</strong>! 🔥<br><small>@${usuarioAtual.user}</small>`;
+                document.getElementById('welcomeMsg').innerHTML = `✨ ${periodo}, ${usuarioAtual.nome}! ✨`;
+                carregarAvaliacoes();
+                carregarLoja();
+                mostrarSecao('treinos');
+            }
+            carregarTreino('futebol');
+        };
+    </script>
+</body>
+</html>
