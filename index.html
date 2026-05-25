@@ -24,14 +24,13 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 60px;
+            padding: 18px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 15, 30, 0.85);
+            background: rgba(10, 15, 30, 0.9);
             backdrop-filter: blur(15px);
             z-index: 1000;
-            transition: all 0.3s;
             border-bottom: 1px solid rgba(255, 107, 53, 0.3);
         }
 
@@ -42,9 +41,9 @@
         }
 
         .logo-area img {
-            height: 60px;
+            height: 55px;
             width: auto;
-            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.6));
+            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.5));
             transition: transform 0.3s;
         }
 
@@ -53,13 +52,12 @@
         }
 
         .logo-area .logo-text {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ff6b35, #f4a261);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
         }
 
         .auth-buttons {
@@ -67,8 +65,8 @@
             gap: 15px;
         }
 
-        .auth-buttons button {
-            padding: 10px 24px;
+        .auth-buttons button, .user-area button {
+            padding: 8px 22px;
             border-radius: 40px;
             font-weight: bold;
             cursor: pointer;
@@ -84,19 +82,17 @@
 
         .btn-login:hover {
             background: #ff6b3520;
-            transform: scale(1.02);
         }
 
-        .btn-signup {
+        .btn-signup, .user-area button {
             background: #ff6b35;
             border: none;
             color: white;
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+            box-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
         }
 
-        .btn-signup:hover {
+        .btn-signup:hover, .user-area button:hover {
             background: #f4a261;
-            transform: scale(1.02);
         }
 
         .user-area {
@@ -104,7 +100,7 @@
             align-items: center;
             gap: 20px;
             background: rgba(255, 107, 53, 0.15);
-            padding: 8px 20px;
+            padding: 5px 20px;
             border-radius: 40px;
             border: 1px solid rgba(255, 107, 53, 0.4);
         }
@@ -118,16 +114,15 @@
             text-align: center;
             position: relative;
             background: radial-gradient(circle at 30% 50%, #0f172a, #050a15);
-            overflow: hidden;
         }
 
         .hero::before {
             content: "";
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
-            animation: rotateGlow 20s linear infinite;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
+            animation: rotateGlow 25s linear infinite;
         }
 
         @keyframes rotateGlow {
@@ -143,43 +138,36 @@
         }
 
         .hero-logo {
-            width: 200px;
-            height: auto;
-            filter: drop-shadow(0 0 25px rgba(255, 107, 53, 0.7));
+            width: 180px;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6));
             animation: floatHero 3s infinite ease-in-out;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         @keyframes floatHero {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-12px); }
         }
 
         .hero-title {
-            font-size: 5rem;
-            background: linear-gradient(135deg, #ff6b35, #f4a261, #ff8c5a);
+            font-size: 4.5rem;
+            background: linear-gradient(135deg, #ff6b35, #f4a261);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 20px;
-            animation: titleGlow 2s infinite alternate;
             letter-spacing: 4px;
         }
 
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 5px #ff6b35; filter: brightness(1); }
-            100% { text-shadow: 0 0 35px #f4a261; filter: brightness(1.1); }
-        }
-
         .typed-container {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            min-height: 90px;
+            font-size: 1.6rem;
+            margin-bottom: 35px;
+            min-height: 80px;
             color: #e2e8f0;
         }
 
         .hero-btn {
-            padding: 16px 48px;
+            padding: 14px 44px;
             font-size: 1.2rem;
             background: #ff6b35;
             border: none;
@@ -188,12 +176,11 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 0 25px rgba(255, 107, 53, 0.6);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
         .hero-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(255, 107, 53, 0.9);
+            transform: scale(1.03);
             background: #f4a261;
         }
 
@@ -204,47 +191,67 @@
             padding: 40px 20px;
         }
 
-        /* Cards de categoria */
+        /* ========= CARDS COM IMAGENS (SEM EMOJIS) ========= */
         .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin: 60px 0;
+            margin: 50px 0;
         }
 
         .category-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 28px;
-            padding: 35px 25px;
-            text-align: center;
+            overflow: hidden;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.4s;
             border: 1px solid rgba(255, 107, 53, 0.3);
         }
 
         .category-card:hover {
-            transform: translateY(-12px);
+            transform: translateY(-10px);
             border-color: #ff6b35;
-            box-shadow: 0 25px 40px rgba(255, 107, 53, 0.25);
-            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 20px 35px rgba(255, 107, 53, 0.25);
         }
 
-        .category-card .icon {
-            font-size: 3.5rem;
-            margin-bottom: 18px;
+        .card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
         }
 
-        .category-card h3 {
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover .card-image img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-content h3 {
             color: #f4a261;
-            margin-bottom: 12px;
-            font-size: 1.7rem;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
         }
 
         /* Seções de conteúdo */
         .content-section {
             display: none;
-            background: rgba(30, 41, 59, 0.6);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(12px);
             border-radius: 32px;
             padding: 35px;
@@ -258,22 +265,16 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Loja */
         .loja-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
         }
 
         .produto-card {
@@ -285,13 +286,12 @@
         }
 
         .produto-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: #ff6b35;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
         }
 
         .produto-imagem {
-            height: 240px;
+            height: 220px;
             overflow: hidden;
         }
 
@@ -299,47 +299,37 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.4s;
         }
 
         .produto-card:hover .produto-imagem img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
         .produto-info {
-            padding: 22px;
+            padding: 20px;
         }
 
         .produto-info h3 {
             color: #f4a261;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .produto-descricao {
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            margin: 12px 0;
-            line-height: 1.4;
-            white-space: pre-line;
+            font-size: 1.4rem;
         }
 
         .produto-preco {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             color: #ff6b35;
             font-weight: bold;
-            margin: 18px 0;
+            margin: 12px 0;
         }
 
         .btn-comprar {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: #ff6b35;
             border: none;
             border-radius: 40px;
             color: white;
             font-weight: bold;
-            font-size: 1rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -352,7 +342,7 @@
             display: inline-block;
             background: #ff6b35;
             font-size: 0.7rem;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
             margin-top: 12px;
         }
@@ -360,30 +350,30 @@
         /* Avaliações */
         .avaliacao {
             background: rgba(30, 41, 59, 0.8);
-            padding: 20px;
+            padding: 18px;
             border-radius: 20px;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             border-left: 4px solid #ff6b35;
         }
 
         .stars {
             color: gold;
-            font-size: 1.2rem;
-            margin: 8px 0;
+            font-size: 1.1rem;
+            margin: 6px 0;
         }
 
         /* Esportes */
         .esportes-list {
             display: flex;
-            gap: 18px;
+            gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .esporte-btn {
             background: #ff6b35;
-            padding: 12px 28px;
-            border-radius: 50px;
+            padding: 10px 24px;
+            border-radius: 40px;
             cursor: pointer;
             transition: 0.2s;
             font-weight: bold;
@@ -391,14 +381,12 @@
 
         .esporte-btn:hover {
             background: #f4a261;
-            transform: scale(1.03);
         }
 
         .video-card {
             background: #1e293b;
-            padding: 25px;
+            padding: 20px;
             border-radius: 24px;
-            margin-top: 20px;
         }
 
         .hidden {
@@ -407,29 +395,25 @@
 
         @media (max-width: 768px) {
             .main-header {
-                padding: 15px 20px;
+                padding: 12px 20px;
             }
             .logo-area .logo-text {
                 font-size: 1.1rem;
             }
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.3rem;
             }
             .typed-container {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             .hero-logo {
-                width: 140px;
-            }
-            .container {
-                padding: 20px;
+                width: 130px;
             }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 <body>
-    <!-- Header fixo -->
     <header class="main-header">
         <div class="logo-area">
             <img src="https://i.postimg.cc/N2HWX8GC/00000000746c71f7a5d6b361cc08f432.jpg" alt="Logo Nobre Chama">
@@ -442,55 +426,46 @@
             </div>
             <div class="user-area hidden" id="userArea">
                 <span id="userNameDisplay"></span>
-                <button class="btn-login" onclick="logout()" style="padding: 5px 15px;">Sair</button>
+                <button onclick="logout()">Sair</button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <img src="https://i.postimg.cc/N2HWX8GC/00000000746c71f7a5d6b361cc08f432.jpg" alt="Nobre Chama" class="hero-logo">
             <h1 class="hero-title">NOBRE CHAMA</h1>
-            <div class="typed-container">
-                <span id="typed"></span>
-            </div>
-            <button class="hero-btn" onclick="showSignupModal()">🔥 INICIAR JORNADA</button>
+            <div class="typed-container"><span id="typed"></span></div>
+            <button class="hero-btn" onclick="showSignupModal()">INICIAR JORNADA</button>
         </div>
     </section>
 
-    <!-- Conteúdo principal (aparece após login) -->
     <div class="container" id="mainContent" style="display: none;">
         <div class="categories">
             <div class="category-card" onclick="mostrarSecao('treinos')">
-                <div class="icon">🏋️</div>
-                <h3>TREINOS</h3>
-                <p>Treinos específicos para cada esporte</p>
+                <div class="card-image"><img src="https://i.postimg.cc/Yh4shzDf/pexels-ketut-subiyanto-4804265.jpg" alt="Treinos"></div>
+                <div class="card-content"><h3>TREINOS</h3><p>Treinos específicos para cada esporte</p></div>
             </div>
             <div class="category-card" onclick="mostrarSecao('avaliacoes')">
-                <div class="icon">⭐</div>
-                <h3>AVALIAÇÕES</h3>
-                <p>O que nossos atletas dizem</p>
+                <div class="card-image"><img src="https://i.postimg.cc/MMDhmZ1R/pexels-photo-15403271.jpg" alt="Avaliações"></div>
+                <div class="card-content"><h3>AVALIAÇÕES</h3><p>O que nossos atletas dizem</p></div>
             </div>
             <div class="category-card" onclick="mostrarSecao('progresso')">
-                <div class="icon">📈</div>
-                <h3>MEU PROGRESSO</h3>
-                <p>Acompanhe sua evolução</p>
+                <div class="card-image"><img src="https://i.postimg.cc/PCw9FQmr/como-acompanhar-seu-progresso-e-fazer-ajustes-no-treino-1.jpg" alt="Progresso"></div>
+                <div class="card-content"><h3>MEU PROGRESSO</h3><p>Acompanhe sua evolução</p></div>
             </div>
             <div class="category-card" onclick="mostrarSecao('loja')">
-                <div class="icon">🛒</div>
-                <h3>LOJA NOBRE</h3>
-                <p>Equipamentos e roupas</p>
+                <div class="card-image"><img src="https://i.postimg.cc/14Rx56QS/progresso-na-academia-superando-obstaculos-e-celebrando-vitorias.jpg" alt="Loja"></div>
+                <div class="card-content"><h3>LOJA NOBRE</h3><p>Equipamentos e roupas</p></div>
             </div>
             <div class="category-card" onclick="mostrarSecao('sobre')">
-                <div class="icon">📖</div>
-                <h3>SOBRE</h3>
-                <p>Nossa história e missão</p>
+                <div class="card-image"><img src="https://i.postimg.cc/0bB14NFt/close-up-of-feet-sportman-runner-running-on-treadmill-in-fitness-club-cardio-workout-health.jpg" alt="Sobre"></div>
+                <div class="card-content"><h3>SOBRE</h3><p>Nossa história e missão</p></div>
             </div>
         </div>
 
         <div id="treinos" class="content-section">
-            <h2>🏆 Escolha seu esporte</h2>
+            <h2>Escolha seu esporte</h2>
             <div class="esportes-list">
                 <div class="esporte-btn" onclick="carregarTreino('futebol')">⚽ Futebol</div>
                 <div class="esporte-btn" onclick="carregarTreino('basquete')">🏀 Basquete</div>
@@ -501,44 +476,39 @@
         </div>
 
         <div id="avaliacoes" class="content-section">
-            <h2>💬 Avaliações da Nobre Chama</h2>
+            <h2>Avaliações da Nobre Chama</h2>
             <div id="listaAvaliacoes"></div>
         </div>
 
         <div id="progresso" class="content-section">
-            <h2>📊 Minha Evolução</h2>
-            <div id="progressoConteudo">
-                <p>🔴 <strong>Registre-se pessoalmente em nossa academia e comece seu progresso!</strong></p>
-                <p>💪 <em>"A chama que queima dentro de você é o que te torna nobre. Venha para a Nobre Chama e transforme sua vida!"</em></p>
-                <p>🏅 Ao se matricular, você terá acesso a: fichas de treino personalizadas, avaliações físicas mensais e medalhas de conquista.</p>
-            </div>
+            <h2>Minha Evolução</h2>
+            <p>🔴 <strong>Registre-se pessoalmente em nossa academia e comece seu progresso!</strong></p>
+            <p>💪 <em>"A chama que queima dentro de você é o que te torna nobre. Venha para a Nobre Chama e transforme sua vida!"</em></p>
+            <p>🏅 Ao se matricular, você terá acesso a: fichas de treino personalizadas, avaliações físicas mensais e medalhas de conquista.</p>
         </div>
 
         <div id="loja" class="content-section">
-            <h2>🛍️ LOJA OFICIAL NOBRE CHAMA</h2>
-            <p style="margin-bottom: 20px;">Equipamentos, suplementos e roupas para quem busca a máxima performance.</p>
+            <h2>Loja Oficial Nobre Chama</h2>
             <div id="produtosLoja" class="loja-grid"></div>
         </div>
 
         <div id="sobre" class="content-section">
-            <h2>🔥 Sobre a Nobre Chama</h2>
+            <h2>Sobre a Nobre Chama</h2>
             <p><strong>Nobre Chama Academia</strong> – Onde atletas são forjados e campeões nascem.</p>
             <p>✔️ Foco total em <strong>qualidade e performance</strong> para atletas de alto rendimento.</p>
             <p>✔️ Metodologia inovadora que une preparação física, mental e nutricional.</p>
-            <p>✔️ Estrutura de ponta com equipamentos de última geração e profissionais especializados.</p>
-            <p>✔️ Mais que uma academia: uma <strong>família</strong> que te leva ao próximo nível.</p>
-            <p><em>"A chama que arde dentro de cada atleta é o combustível para a vitória. Nós só ajudamos a torná-la mais forte."</em> – Fundador</p>
+            <p>✔️ Estrutura de ponta com equipamentos de última geração.</p>
+            <p><em>"A chama que arde dentro de cada atleta é o combustível para a vitória."</em> – Fundador</p>
         </div>
     </div>
 
-    <!-- Modal de cadastro simples -->
-    <div id="modalOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:2000; justify-content:center; align-items:center;">
-        <div style="background:#1e293b; padding:40px; border-radius:30px; width:90%; max-width:400px; text-align:center; border:1px solid #ff6b35;">
+    <div id="modalOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:#1e293b; padding:35px; border-radius:30px; width:90%; max-width:400px; text-align:center; border:1px solid #ff6b35;">
             <h2 style="color:#f4a261; margin-bottom:20px;" id="modalTitle">Criar Conta</h2>
             <input type="text" id="modalNome" placeholder="Seu nome" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:none; background:#0f172a; color:white;">
             <input type="text" id="modalUser" placeholder="Usuário" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:none; background:#0f172a; color:white;">
             <input type="password" id="modalPass" placeholder="Senha" style="width:100%; padding:12px; margin:10px 0; border-radius:12px; border:none; background:#0f172a; color:white;">
-            <button onclick="confirmarCadastro()" style="background:#ff6b35; border:none; padding:12px; width:100%; border-radius:40px; color:white; font-weight:bold; margin-top:15px;">✅ Confirmar</button>
+            <button onclick="confirmarCadastro()" style="background:#ff6b35; border:none; padding:12px; width:100%; border-radius:40px; color:white; font-weight:bold; margin-top:15px;">Confirmar</button>
             <button onclick="fecharModal()" style="background:transparent; border:1px solid #ff6b35; padding:10px; width:100%; border-radius:40px; color:#ff6b35; margin-top:10px;">Cancelar</button>
         </div>
     </div>
@@ -556,57 +526,30 @@
         ];
 
         const produtos = [
-            { nome: "WHEY PROTEIN", preco: 120.00, imagem: "https://i.imgur.com/lq6iX2e.jpeg", descricao: "Concentrado • Ultrafiltrado\nForça • Recuperação • Definição\n\n✅ Alta Performance\n✅ Recuperação Intensa\n✅ Com BCAA Natural" },
-            { nome: "CREATINA", preco: 75.00, imagem: "https://i.imgur.com/xohg83F.png", descricao: "Creatine Monohydrate\nForça • Potência • Performance\n\n✅ Mais Força\n✅ Mais Energia\n✅ 100% Pura" },
-            { nome: "CAMISETA", preco: 70.00, imagem: "https://i.imgur.com/btpXDTr.jpeg", descricao: "Vista sua força.\n\n✅ Tecido Dry Fit\n✅ Estampa Premium\n✅ Design Exclusivo" },
-            { nome: "GARRAFA", preco: 30.00, imagem: "https://i.imgur.com/Pp2F52b.jpeg", descricao: "Hidrate seu corpo.\n\n✅ Vazamento Zero\n✅ BPA Free\n✅ Material resistente" }
+            { nome: "WHEY PROTEIN", preco: 120.00, imagem: "https://i.imgur.com/lq6iX2e.jpeg", descricao: "Concentrado • Ultrafiltrado. Alta performance e recuperação intensa." },
+            { nome: "CREATINA", preco: 75.00, imagem: "https://i.imgur.com/xohg83F.png", descricao: "Creatine Monohydrate. Mais força, potência e energia." },
+            { nome: "CAMISETA", preco: 70.00, imagem: "https://i.imgur.com/btpXDTr.jpeg", descricao: "Tecido Dry Fit. Estampa premium e design exclusivo." },
+            { nome: "GARRAFA", preco: 30.00, imagem: "https://i.imgur.com/Pp2F52b.jpeg", descricao: "Vazamento zero, BPA Free. Mantém sua bebida gelada." }
         ];
 
-        function showSignupModal() {
-            currentModal = 'signup';
-            document.getElementById('modalTitle').innerText = '🔥 Criar Conta';
-            document.getElementById('modalOverlay').style.display = 'flex';
-        }
-
-        function showLoginModal() {
-            currentModal = 'login';
-            document.getElementById('modalTitle').innerText = '🔑 Entrar';
-            document.getElementById('modalOverlay').style.display = 'flex';
-        }
-
-        function fecharModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-            document.getElementById('modalNome').value = '';
-            document.getElementById('modalUser').value = '';
-            document.getElementById('modalPass').value = '';
-        }
+        function showSignupModal() { currentModal = 'signup'; document.getElementById('modalTitle').innerText = 'Criar Conta'; document.getElementById('modalOverlay').style.display = 'flex'; }
+        function showLoginModal() { currentModal = 'login'; document.getElementById('modalTitle').innerText = 'Entrar'; document.getElementById('modalOverlay').style.display = 'flex'; }
+        function fecharModal() { document.getElementById('modalOverlay').style.display = 'none'; limparModal(); }
+        function limparModal() { document.getElementById('modalNome').value = ''; document.getElementById('modalUser').value = ''; document.getElementById('modalPass').value = ''; }
 
         function confirmarCadastro() {
             const nome = document.getElementById('modalNome').value;
             const user = document.getElementById('modalUser').value;
             const pass = document.getElementById('modalPass').value;
-
             if(currentModal === 'signup') {
-                if(!nome || !user || !pass) {
-                    alert("Preencha todos os campos!");
-                    return;
-                }
+                if(!nome || !user || !pass) { alert("Preencha todos os campos!"); return; }
                 usuarioAtual = { nome, user, pass };
                 localStorage.setItem('usuario', JSON.stringify(usuarioAtual));
                 finalizarLogin(nome, user);
             } else {
                 const saved = localStorage.getItem('usuario');
-                if(saved) {
-                    const userData = JSON.parse(saved);
-                    if(userData.user === user && userData.pass === pass) {
-                        usuarioAtual = userData;
-                        finalizarLogin(userData.nome, userData.user);
-                    } else {
-                        alert("Usuário ou senha incorretos!");
-                    }
-                } else {
-                    alert("Nenhuma conta encontrada. Crie uma conta primeiro!");
-                }
+                if(saved) { const userData = JSON.parse(saved); if(userData.user === user && userData.pass === pass) { usuarioAtual = userData; finalizarLogin(userData.nome, userData.user); } else { alert("Usuário ou senha incorretos!"); } }
+                else { alert("Nenhuma conta encontrada. Crie uma conta primeiro!"); }
             }
         }
 
@@ -616,112 +559,27 @@
             document.getElementById('userArea').classList.remove('hidden');
             document.getElementById('userNameDisplay').innerHTML = `🔥 ${nome}`;
             document.getElementById('mainContent').style.display = 'block';
-            
-            const hora = new Date().getHours();
-            let periodo = "Bom dia";
-            if(hora >= 18) periodo = "Boa noite";
-            else if(hora >= 12) periodo = "Boa tarde";
-            
-            // Scroll suave para o conteúdo
             document.querySelector('.hero').style.height = '60vh';
             document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
-            
-            carregarAvaliacoes();
-            carregarLoja();
-            mostrarSecao('treinos');
+            carregarAvaliacoes(); carregarLoja(); mostrarSecao('treinos');
         }
 
-        function logout() {
-            usuarioAtual = null;
-            localStorage.removeItem('usuario');
-            document.getElementById('authButtons').classList.remove('hidden');
-            document.getElementById('userArea').classList.add('hidden');
-            document.getElementById('mainContent').style.display = 'none';
-            document.querySelector('.hero').style.height = '100vh';
-        }
+        function logout() { usuarioAtual = null; localStorage.removeItem('usuario'); document.getElementById('authButtons').classList.remove('hidden'); document.getElementById('userArea').classList.add('hidden'); document.getElementById('mainContent').style.display = 'none'; document.querySelector('.hero').style.height = '100vh'; }
 
-        function mostrarSecao(secao) {
-            const secoes = ['treinos', 'avaliacoes', 'progresso', 'loja', 'sobre'];
-            secoes.forEach(s => {
-                document.getElementById(s).classList.remove('active');
-            });
-            document.getElementById(secao).classList.add('active');
-        }
+        function mostrarSecao(secao) { const secoes = ['treinos', 'avaliacoes', 'progresso', 'loja', 'sobre']; secoes.forEach(s => { document.getElementById(s).classList.remove('active'); }); document.getElementById(secao).classList.add('active'); }
 
         function carregarTreino(esporte) {
             const div = document.getElementById('treinoConteudo');
-            let videos = {
-                futebol: "🏃‍♂️ Treino de explosão para futebol: Barreiras, tiros de potência e mudança de direção.",
-                basquete: "🏀 Treino de salto vertical: Agachamentos, pliometria e finalizações.",
-                volei: "🏐 Treino de impulsão e bloqueio: Sprints laterais e fortalecimento de ombros.",
-                natacao: "🏊 Treino de resistência aquática: Pranchão, pernada e braçada intensa."
-            };
-            div.innerHTML = `
-                <div class="video-card">
-                    <h3>🎥 ${esporte.toUpperCase()}</h3>
-                    <p>📹 ${videos[esporte]}</p>
-                    <p><strong>Como fazer:</strong> 3 séries de 12 repetições. Descanse 45s.</p>
-                    <button onclick="alert('Vídeo demonstrativo em breve! 🔥')" style="background:#ff6b35; padding:10px 24px; border-radius:40px;">Assistir treino</button>
-                </div>
-            `;
+            const videos = { futebol: "🏃‍♂️ Treino de explosão para futebol: Barreiras, tiros de potência e mudança de direção.", basquete: "🏀 Treino de salto vertical: Agachamentos, pliometria e finalizações.", volei: "🏐 Treino de impulsão e bloqueio: Sprints laterais e fortalecimento de ombros.", natacao: "🏊 Treino de resistência aquática: Pranchão, pernada e braçada intensa." };
+            div.innerHTML = `<div class="video-card"><h3>🎥 ${esporte.toUpperCase()}</h3><p>📹 ${videos[esporte]}</p><p><strong>Como fazer:</strong> 3 séries de 12 repetições. Descanse 45s.</p><button onclick="alert('Vídeo demonstrativo em breve! 🔥')" style="background:#ff6b35; padding:8px 20px; border-radius:40px;">Assistir treino</button></div>`;
         }
 
-        function carregarAvaliacoes() {
-            const div = document.getElementById('listaAvaliacoes');
-            div.innerHTML = avaliacoesFalsas.map(a => `
-                <div class="avaliacao">
-                    <strong>${a.nome}</strong>
-                    <div class="stars">${'★'.repeat(a.estrelas)}${'☆'.repeat(5-a.estrelas)}</div>
-                    <p>${a.texto}</p>
-                </div>
-            `).join('');
-        }
+        function carregarAvaliacoes() { const div = document.getElementById('listaAvaliacoes'); div.innerHTML = avaliacoesFalsas.map(a => `<div class="avaliacao"><strong>${a.nome}</strong><div class="stars">${'★'.repeat(a.estrelas)}${'☆'.repeat(5-a.estrelas)}</div><p>${a.texto}</p></div>`).join(''); }
+        function carregarLoja() { const div = document.getElementById('produtosLoja'); div.innerHTML = produtos.map(p => `<div class="produto-card"><div class="produto-imagem"><img src="${p.imagem}" alt="${p.nome}"></div><div class="produto-info"><h3>${p.nome}</h3><p style="font-size:0.8rem; color:#cbd5e1;">${p.descricao}</p><div class="produto-preco">R$ ${p.preco.toFixed(2)}</div><button class="btn-comprar" onclick="alert('✅ Produto adicionado ao carrinho!')">COMPRAR</button><div class="badge">Frete Grátis</div></div></div>`).join(''); }
 
-        function carregarLoja() {
-            const div = document.getElementById('produtosLoja');
-            div.innerHTML = produtos.map(p => `
-                <div class="produto-card">
-                    <div class="produto-imagem">
-                        <img src="${p.imagem}" alt="${p.nome}">
-                    </div>
-                    <div class="produto-info">
-                        <h3>${p.nome}</h3>
-                        <div class="produto-descricao">${p.descricao.replace(/\n/g, '<br>')}</div>
-                        <div class="produto-preco">R$ ${p.preco.toFixed(2)}</div>
-                        <button class="btn-comprar" onclick="alert('✅ Produto adicionado ao carrinho!\\n🔥 Nobre Chama agradece!')">🛒 COMPRAR</button>
-                        <div class="badge">⚡ Frete Grátis</div>
-                    </div>
-                </div>
-            `).join('');
-        }
+        new Typed('#typed', { strings: ['FORÇA. POTÊNCIA. NOBREZA.', 'ONDE ATLETAS SÃO FORJADOS.', 'SUA NOVA CHAMA ESTÁ AQUI.'], typeSpeed: 55, backSpeed: 35, backDelay: 2000, loop: true, cursorChar: '🔥' });
 
-        // Animação de digitação
-        new Typed('#typed', {
-            strings: ['FORÇA. POTÊNCIA. NOBREZA.', 'ONDE ATLETAS SÃO FORJADOS.', 'SUA NOVA CHAMA ESTÁ AQUI.', 'ALTA PERFORMANCE.'],
-            typeSpeed: 60,
-            backSpeed: 35,
-            backDelay: 2000,
-            loop: true,
-            showCursor: true,
-            cursorChar: '🔥'
-        });
-
-        window.onload = () => {
-            const saved = localStorage.getItem('usuario');
-            if(saved) {
-                const userData = JSON.parse(saved);
-                usuarioAtual = userData;
-                document.getElementById('authButtons').classList.add('hidden');
-                document.getElementById('userArea').classList.remove('hidden');
-                document.getElementById('userNameDisplay').innerHTML = `🔥 ${userData.nome}`;
-                document.getElementById('mainContent').style.display = 'block';
-                document.querySelector('.hero').style.height = '60vh';
-                carregarAvaliacoes();
-                carregarLoja();
-                mostrarSecao('treinos');
-            }
-            carregarTreino('futebol');
-        };
+        window.onload = () => { const saved = localStorage.getItem('usuario'); if(saved) { const userData = JSON.parse(saved); usuarioAtual = userData; document.getElementById('authButtons').classList.add('hidden'); document.getElementById('userArea').classList.remove('hidden'); document.getElementById('userNameDisplay').innerHTML = `🔥 ${userData.nome}`; document.getElementById('mainContent').style.display = 'block'; document.querySelector('.hero').style.height = '60vh'; carregarAvaliacoes(); carregarLoja(); mostrarSecao('treinos'); } carregarTreino('futebol'); };
     </script>
 </body>
 </html>
