@@ -105,7 +105,7 @@
             border: 1px solid rgba(255, 107, 53, 0.4);
         }
 
-        /* Hero Section */
+        /* Hero Section - só aparece quando NÃO está logado */
         .hero {
             height: 100vh;
             display: flex;
@@ -114,6 +114,10 @@
             text-align: center;
             position: relative;
             background: radial-gradient(circle at 30% 50%, #0f172a, #050a15);
+        }
+
+        .hero.hidden-hero {
+            display: none;
         }
 
         .hero::before {
@@ -191,12 +195,37 @@
             padding: 40px 20px;
         }
 
-        /* ========= CARDS COM IMAGENS (SEM EMOJIS) ========= */
+        /* Banner de boas-vindas com nome do usuário */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(244,162,97,0.05));
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid rgba(255,107,53,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .welcome-banner h2 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #ff6b35, #f4a261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .welcome-banner p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-top: 10px;
+        }
+
+        /* Cards com imagens */
         .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin: 50px 0;
+            margin: 30px 0 50px;
         }
 
         .category-card {
@@ -409,6 +438,9 @@
             .hero-logo {
                 width: 130px;
             }
+            .welcome-banner h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -431,7 +463,8 @@
         </div>
     </header>
 
-    <section class="hero">
+    <!-- Hero Section (tela inicial com "Iniciar Jornada") -->
+    <section class="hero" id="heroSection">
         <div class="hero-content">
             <img src="https://i.postimg.cc/N2HWX8GC/00000000746c71f7a5d6b361cc08f432.jpg" alt="Nobre Chama" class="hero-logo">
             <h1 class="hero-title">NOBRE CHAMA</h1>
@@ -440,7 +473,14 @@
         </div>
     </section>
 
+    <!-- Conteúdo principal (aparece APÓS o login) -->
     <div class="container" id="mainContent" style="display: none;">
+        <!-- Banner de boas-vindas com nome do usuário -->
+        <div class="welcome-banner" id="welcomeBanner">
+            <h2 id="saudacaoTexto">🔥 Bom dia, <span id="nomeUsuario"></span>!</h2>
+            <p>Bem-vindo à sua jornada na Nobre Chama. Sua evolução começa agora!</p>
+        </div>
+
         <div class="categories">
             <div class="category-card" onclick="mostrarSecao('treinos')">
                 <div class="card-image"><img src="https://i.postimg.cc/Yh4shzDf/pexels-ketut-subiyanto-4804265.jpg" alt="Treinos"></div>
@@ -502,6 +542,7 @@
         </div>
     </div>
 
+    <!-- Modal -->
     <div id="modalOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:2000; justify-content:center; align-items:center;">
         <div style="background:#1e293b; padding:35px; border-radius:30px; width:90%; max-width:400px; text-align:center; border:1px solid #ff6b35;">
             <h2 style="color:#f4a261; margin-bottom:20px;" id="modalTitle">Criar Conta</h2>
@@ -555,31 +596,123 @@
 
         function finalizarLogin(nome, user) {
             fecharModal();
+            
+            // Esconde a hero section (tela inicial)
+            document.getElementById('heroSection').classList.add('hidden-hero');
+            
+            // Mostra o conteúdo principal
+            document.getElementById('mainContent').style.display = 'block';
+            
+            // Atualiza o header (mostra área do usuário)
             document.getElementById('authButtons').classList.add('hidden');
             document.getElementById('userArea').classList.remove('hidden');
             document.getElementById('userNameDisplay').innerHTML = `🔥 ${nome}`;
-            document.getElementById('mainContent').style.display = 'block';
-            document.querySelector('.hero').style.height = '60vh';
+            
+            // Define a saudação com base na hora do dia
+            const hora = new Date().getHours();
+            let periodo = "Bom dia";
+            if (hora >= 18) periodo = "Boa noite";
+            else if (hora >= 12) periodo = "Boa tarde";
+            
+            // Exibe "Bom dia, Nome do Usuário"
+            document.getElementById('saudacaoTexto').innerHTML = `🔥 ${periodo}, <span style="color:#ff6b35">${nome}</span>!`;
+            document.getElementById('nomeUsuario').innerHTML = nome;
+            
+            // Scroll suave para o conteúdo
             document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
-            carregarAvaliacoes(); carregarLoja(); mostrarSecao('treinos');
+            
+            // Carrega os conteúdos
+            carregarAvaliacoes();
+            carregarLoja();
+            mostrarSecao('treinos');
         }
 
-        function logout() { usuarioAtual = null; localStorage.removeItem('usuario'); document.getElementById('authButtons').classList.remove('hidden'); document.getElementById('userArea').classList.add('hidden'); document.getElementById('mainContent').style.display = 'none'; document.querySelector('.hero').style.height = '100vh'; }
+        function logout() {
+            usuarioAtual = null;
+            localStorage.removeItem('usuario');
+            
+            // Mostra a hero section novamente
+            document.getElementById('heroSection').classList.remove('hidden-hero');
+            
+            // Esconde o conteúdo principal
+            document.getElementById('mainContent').style.display = 'none';
+            
+            // Mostra os botões de login/criar conta no header
+            document.getElementById('authButtons').classList.remove('hidden');
+            document.getElementById('userArea').classList.add('hidden');
+        }
 
-        function mostrarSecao(secao) { const secoes = ['treinos', 'avaliacoes', 'progresso', 'loja', 'sobre']; secoes.forEach(s => { document.getElementById(s).classList.remove('active'); }); document.getElementById(secao).classList.add('active'); }
+        function mostrarSecao(secao) { 
+            const secoes = ['treinos', 'avaliacoes', 'progresso', 'loja', 'sobre']; 
+            secoes.forEach(s => { 
+                document.getElementById(s).classList.remove('active'); 
+            }); 
+            document.getElementById(secao).classList.add('active'); 
+        }
 
         function carregarTreino(esporte) {
             const div = document.getElementById('treinoConteudo');
-            const videos = { futebol: "🏃‍♂️ Treino de explosão para futebol: Barreiras, tiros de potência e mudança de direção.", basquete: "🏀 Treino de salto vertical: Agachamentos, pliometria e finalizações.", volei: "🏐 Treino de impulsão e bloqueio: Sprints laterais e fortalecimento de ombros.", natacao: "🏊 Treino de resistência aquática: Pranchão, pernada e braçada intensa." };
+            const videos = { 
+                futebol: "🏃‍♂️ Treino de explosão para futebol: Barreiras, tiros de potência e mudança de direção.", 
+                basquete: "🏀 Treino de salto vertical: Agachamentos, pliometria e finalizações.", 
+                volei: "🏐 Treino de impulsão e bloqueio: Sprints laterais e fortalecimento de ombros.", 
+                natacao: "🏊 Treino de resistência aquática: Pranchão, pernada e braçada intensa." 
+            };
             div.innerHTML = `<div class="video-card"><h3>🎥 ${esporte.toUpperCase()}</h3><p>📹 ${videos[esporte]}</p><p><strong>Como fazer:</strong> 3 séries de 12 repetições. Descanse 45s.</p><button onclick="alert('Vídeo demonstrativo em breve! 🔥')" style="background:#ff6b35; padding:8px 20px; border-radius:40px;">Assistir treino</button></div>`;
         }
 
-        function carregarAvaliacoes() { const div = document.getElementById('listaAvaliacoes'); div.innerHTML = avaliacoesFalsas.map(a => `<div class="avaliacao"><strong>${a.nome}</strong><div class="stars">${'★'.repeat(a.estrelas)}${'☆'.repeat(5-a.estrelas)}</div><p>${a.texto}</p></div>`).join(''); }
-        function carregarLoja() { const div = document.getElementById('produtosLoja'); div.innerHTML = produtos.map(p => `<div class="produto-card"><div class="produto-imagem"><img src="${p.imagem}" alt="${p.nome}"></div><div class="produto-info"><h3>${p.nome}</h3><p style="font-size:0.8rem; color:#cbd5e1;">${p.descricao}</p><div class="produto-preco">R$ ${p.preco.toFixed(2)}</div><button class="btn-comprar" onclick="alert('✅ Produto adicionado ao carrinho!')">COMPRAR</button><div class="badge">Frete Grátis</div></div></div>`).join(''); }
+        function carregarAvaliacoes() { 
+            const div = document.getElementById('listaAvaliacoes'); 
+            div.innerHTML = avaliacoesFalsas.map(a => `<div class="avaliacao"><strong>${a.nome}</strong><div class="stars">${'★'.repeat(a.estrelas)}${'☆'.repeat(5-a.estrelas)}</div><p>${a.texto}</p></div>`).join(''); 
+        }
+        
+        function carregarLoja() { 
+            const div = document.getElementById('produtosLoja'); 
+            div.innerHTML = produtos.map(p => `<div class="produto-card"><div class="produto-imagem"><img src="${p.imagem}" alt="${p.nome}"></div><div class="produto-info"><h3>${p.nome}</h3><p style="font-size:0.8rem; color:#cbd5e1;">${p.descricao}</p><div class="produto-preco">R$ ${p.preco.toFixed(2)}</div><button class="btn-comprar" onclick="alert('✅ Produto adicionado ao carrinho!')">COMPRAR</button><div class="badge">Frete Grátis</div></div></div>`).join(''); 
+        }
 
-        new Typed('#typed', { strings: ['FORÇA. POTÊNCIA. NOBREZA.', 'ONDE ATLETAS SÃO FORJADOS.', 'SUA NOVA CHAMA ESTÁ AQUI.'], typeSpeed: 55, backSpeed: 35, backDelay: 2000, loop: true, cursorChar: '🔥' });
+        // Animação de digitação
+        new Typed('#typed', { 
+            strings: ['FORÇA. POTÊNCIA. NOBREZA.', 'ONDE ATLETAS SÃO FORJADOS.', 'SUA NOVA CHAMA ESTÁ AQUI.'], 
+            typeSpeed: 55, 
+            backSpeed: 35, 
+            backDelay: 2000, 
+            loop: true, 
+            cursorChar: '🔥' 
+        });
 
-        window.onload = () => { const saved = localStorage.getItem('usuario'); if(saved) { const userData = JSON.parse(saved); usuarioAtual = userData; document.getElementById('authButtons').classList.add('hidden'); document.getElementById('userArea').classList.remove('hidden'); document.getElementById('userNameDisplay').innerHTML = `🔥 ${userData.nome}`; document.getElementById('mainContent').style.display = 'block'; document.querySelector('.hero').style.height = '60vh'; carregarAvaliacoes(); carregarLoja(); mostrarSecao('treinos'); } carregarTreino('futebol'); };
+        // Verifica se já existe usuário logado ao carregar a página
+        window.onload = () => { 
+            const saved = localStorage.getItem('usuario'); 
+            if(saved) { 
+                const userData = JSON.parse(saved); 
+                usuarioAtual = userData; 
+                
+                // Esconde hero e mostra conteúdo
+                document.getElementById('heroSection').classList.add('hidden-hero');
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('authButtons').classList.add('hidden');
+                document.getElementById('userArea').classList.remove('hidden');
+                document.getElementById('userNameDisplay').innerHTML = `🔥 ${userData.nome}`;
+                
+                // Saudação com horário
+                const hora = new Date().getHours();
+                let periodo = "Bom dia";
+                if (hora >= 18) periodo = "Boa noite";
+                else if (hora >= 12) periodo = "Boa tarde";
+                document.getElementById('saudacaoTexto').innerHTML = `🔥 ${periodo}, <span style="color:#ff6b35">${userData.nome}</span>!`;
+                document.getElementById('nomeUsuario').innerHTML = userData.nome;
+                
+                carregarAvaliacoes(); 
+                carregarLoja(); 
+                mostrarSecao('treinos'); 
+            } else {
+                // Garante que hero aparece e conteúdo fica escondido
+                document.getElementById('heroSection').classList.remove('hidden-hero');
+                document.getElementById('mainContent').style.display = 'none';
+            }
+            carregarTreino('futebol'); 
+        };
     </script>
 </body>
 </html>
